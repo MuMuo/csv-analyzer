@@ -40,9 +40,8 @@ if "df" in st.session_state:
             res = dataframe_agent(openai_api_key=api_key, df = st.session_state["df"], query=query)
 
         output_type=list(res.keys())[0]
-        if output_type == "answer":
-            st.write(res[output_type])
-        elif output_type == "table":
+        st.write(res[output_type])
+        if output_type == "table":
             st.dataframe(pd.DataFrame(res[output_type]["data"], columns=res[output_type]["columns"]))
         elif output_type == "bar" or output_type == "line" or output_type == "scatter":
             gen_chart(res[output_type],output_type)
