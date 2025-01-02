@@ -4,7 +4,7 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 import json
 
 PROMPT_TEMPLATE = """
-你是一位数据分析助手，你的回应内容取决于用户的请求内容。
+你是一位数据分析助手，你的回应内容取决于用户的请求内容，回答格式必须按照如下JSON字符串格式输出，不要有多余的内容。
 
 1、对于文字回答得问题，按照这样的格式回答：
     {"answer":"<你的答案写在这里>"}
@@ -18,9 +18,8 @@ PROMPT_TEMPLATE = """
     {"line":{"columns":["column1", "column2", "column3", ...], "data":[34, 21, 91, ...]}}
 5、如果用户的请求适合返回散点图， 按照这样的格式回答：
     {"scatter":{"columns":["column1", "column2", "column3", ...], "data":[34, 21, 91, ...]}}
-请注意我们只支持三种图表："bar","line","scatter"。
-
-请将所有结果以JSON字符串格式输出，请注意要将"columns"列表和"data"列表中的所有字符串用双引号包围。
+    
+请注意我们只支持三种图表："bar","line","scatter"。且所有结果以JSON字符串格式输出，请注意要将"columns"列表和"data"列表中的所有字符串用双引号包围。
 例如：{"columns": ["Products", "Orders"], "data": [["32085Lip", 245], ["76439Eye", 178]]}
 
 你要处理的用户请求如下：
