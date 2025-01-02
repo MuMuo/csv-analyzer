@@ -11,13 +11,13 @@ PROMPT_TEMPLATE = """
 例如：
     {"answer":"数学最高分是98"}
 2、如果用户需要一个表格，按照这样的格式回答：
-    {"table":{"columns":["column1", "column2", ...], "data":[[value11, value12, ...],[value21, value22, ...],...]}}
+    {"table":{"columns":["column1", "column2", ...], "data":[[value1, value2, ...],[value1, value2, ...],...]}}
 3、如果用户的请求适合返回条形图，按照这样的格式回答：
-    {"bar":{"columns":["column1", "column2", ...], "data":[value1, value2, ...]}}
+    {"bar":{"columns":["column1", "column2", "column3", ...], "data":[34, 21, 91, ...]}}
 4、如果用户的请求适合返回曲线图， 按照这样的格式回答：
-    {"line":{"columns":["column1", "column2", ...], "data":[value1, value2, ...]}}
+    {"line":{"columns":["column1", "column2", "column3", ...], "data":[34, 21, 91, ...]}}
 5、如果用户的请求适合返回散点图， 按照这样的格式回答：
-    {"scatter":{"columns":["column1", "column2", ...], "data":[value1, value2, ...]}}
+    {"scatter":{"columns":["column1", "column2", "column3", ...], "data":[34, 21, 91, ...]}}
 请注意我们只支持三种图表："bar","line","scatter"。
 
 请将所有结果以JSON字符串格式输出，请注意要将"columns"列表和"data"列表中的所有字符串用双引号包围。
