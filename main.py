@@ -12,7 +12,9 @@ def gen_chart(ai_response):
     output_data = ai_response[output_type]
     with st.expander("ai回答"):
         st.write(output_data)
-
+        
+    #if output_type == "answer":
+    #    st.write(output_data)
     if output_type == "table":
         st.dataframe(pd.DataFrame(output_data["data"], columns=output_data["columns"]))
     elif output_type == "bar" or output_type == "line" or output_type == "scatter":
@@ -40,7 +42,10 @@ if "df" in st.session_state:
 
     if "res_lst" in st.session_state:
         with st.expander("历史问答"):
-            for res in st.session_state["res_list"]:
+            for i in range(0,len(st.session_state["res_list"])):
+                res = st.session_state["res_list"][i]
+                question = st.session_state["query"][i]
+                st.write(question)
                 gen_chart(res)
                 st.divider()
 
@@ -51,12 +56,15 @@ if "df" in st.session_state:
         if not query :
             st.info("请输入你的问题")
             st.stop()
+        
         with st.spinner("AI正在思考中，请稍等 ..."):
             res = dataframe_agent(openai_api_key=api_key, df = st.session_state["df"], query=query)
 
         if "res_list" in st.session_state:
+            st.session_state["query"] = st.session_state["query"].append(query)
             st.session_state["res_list"] = st.session_state["res_list"].append(res)
         else:
-            st.session_state["res_list"]=[res]
+            st.session_state["res_list"] = [res]
+            st.session_state["query"] = [query]
 
         gen_chart(res)
